@@ -1,9 +1,78 @@
-function App() {
+import Page from './components/Page';
+
+export default function App() {
   return (
-    <h1 className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
-      This is my Chatbot Application
-    </h1>
+    <Page>
+      <h1>This is my page</h1>
+      <h2>This is my page</h2>
+      <h3>This is my page</h3>
+      <h4>This is my page</h4>
+      <h5>This is my page</h5>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+      <h1>This is my page</h1>
+    </Page>
   );
 }
-
-export default App;
