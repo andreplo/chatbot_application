@@ -1,11 +1,20 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ChatWindow from './components/ChatWindow';
 import Page from './components/Page';
 
 export default function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+      },
+    },
+  });
   return (
-    <Page>
-      <ChatWindow />
-      {/* <h1>This is my page</h1>
+    <QueryClientProvider client={queryClient}>
+      <Page>
+        <ChatWindow />
+        {/* <h1>This is my page</h1>
       <h2>This is my page</h2>
       <h3>This is my page</h3>
       <h4>This is my page</h4>
@@ -75,6 +84,7 @@ export default function App() {
       <h1>This is my page</h1>
       <h1>This is my page</h1>
       <h1>This is my page</h1> */}
-    </Page>
+      </Page>
+    </QueryClientProvider>
   );
 }
