@@ -9,7 +9,7 @@
   h4,
   h5,
   h6 {
-    @apply text-red-900 dark:text-white;
+    @apply text-gray-900 dark:text-white;
   }
 
   h1 {

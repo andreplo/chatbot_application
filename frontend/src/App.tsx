@@ -1,9 +1,11 @@
+import ChatWindow from './components/ChatWindow';
 import Page from './components/Page';
 
 export default function App() {
   return (
     <Page>
-      <h1>This is my page</h1>
+      <ChatWindow />
+      {/* <h1>This is my page</h1>
       <h2>This is my page</h2>
       <h3>This is my page</h3>
       <h4>This is my page</h4>
@@ -72,7 +74,7 @@ export default function App() {
       <h1>This is my page</h1>
       <h1>This is my page</h1>
       <h1>This is my page</h1>
-      <h1>This is my page</h1>
+      <h1>This is my page</h1> */}
     </Page>
   );
 }
