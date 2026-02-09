@@ -34,7 +34,9 @@ export default function ChatWindow() {
         { id: `${prev.length + 1}`, text: message, sender: 'user' },
         { id: `${prev.length + 2}`, text: '', sender: 'bot', type: 'pending' },
       ]);
-      return !failChecked ? sendMessage({ message }) : Promise.reject(new Error("Failed to send message"));
+      return !failChecked
+        ? sendMessage({ message })
+        : Promise.reject(new Error('Failed to send message'));
     },
     onSuccess: (response) => {
       setMessagesState((prev) => [
@@ -43,10 +45,15 @@ export default function ChatWindow() {
       ]);
     },
     onError: (error) => {
-      console.error(error)
+      console.error(error);
       setMessagesState((prev) => [
         ...prev.slice(0, -1),
-        { id: `${prev.length + 1}`, text: 'Failed to send message. Please try again.', sender: 'bot', type: 'error' },
+        {
+          id: `${prev.length + 1}`,
+          text: 'Failed to send message. Please try again.',
+          sender: 'bot',
+          type: 'error',
+        },
       ]);
     },
   });
@@ -82,17 +89,19 @@ export default function ChatWindow() {
       <div className="flex flex-row justify-between items-center">
         <h3 className="dark:text-pink-200">Chat Window</h3>
         <label className="inline-flex items-center space-x-2 cursor-pointer">
-      <input
-        type="checkbox"
-        checked={failChecked}
-        onChange={(e) => setFailChecked(e.target.checked)}
-        className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-      />
-      <span className="text-gray-700 dark:text-pink-200">Send and fail</span>
-    </label>
+          <input
+            type="checkbox"
+            checked={failChecked}
+            onChange={(e) => setFailChecked(e.target.checked)}
+            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+          />
+          <span className="text-gray-700 dark:text-pink-200">Send and fail</span>
+        </label>
         <button
           onClick={handleReset}
-          disabled={sendMessageMutation.isPending || resetMutation.isPending || messagesState.length === 0}
+          disabled={
+            sendMessageMutation.isPending || resetMutation.isPending || messagesState.length === 0
+          }
           className="bg-transparent  text-slate-700 dark:text-pink-200 font-semibold my-2 p-2 rounded-lg hover:scale-105 hover:cursor-pointer transition-colors duration-300 disabled:bg-gray-50 dark:disabled:bg-transparent dark:disabled:text-gray-400 disabled:cursor-not-allowed w-fit"
         >
           + New
