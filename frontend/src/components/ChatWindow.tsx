@@ -23,7 +23,6 @@ import { resetConversation, sendMessage } from '../api/endpoints';
 // ];
 
 export default function ChatWindow() {
-  //   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>('');
   const [messagesState, setMessagesState] = useState<MessageType[]>([]);
 
@@ -32,14 +31,13 @@ export default function ChatWindow() {
       setMessagesState((prev) => [
         ...prev,
         { id: `${prev.length + 1}`, text: message, sender: 'user' },
+        { id: `${prev.length + 2}`, text: '', sender: 'bot', type: 'pending' },
       ]);
       return sendMessage({ message });
     },
     onSuccess: (response) => {
-      console.log(response);
-      console.log(`Message sent successfully: ${response.data.message}`);
       setMessagesState((prev) => [
-        ...prev,
+        ...prev.slice(0, -1),
         { id: `${prev.length + 1}`, text: response.data.message, sender: 'bot' },
       ]);
     },
@@ -49,10 +47,8 @@ export default function ChatWindow() {
   const handleClick = () => {
     console.log(inputValue);
     setInputValue('');
+    
     mutation.mutate(inputValue);
-    // if (!inputRef.current) return;
-    // console.log(inputRef.current.value);
-    // alert(`Input value: ${inputRef.current.value}`);
   };
 
   const resetMutation = useMutation({
@@ -66,16 +62,25 @@ export default function ChatWindow() {
   const handleReset = () => {
     resetMutation.mutate();
   };
+
+  const handleEnterKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && e.shiftKey) return;
+    if (e.key === 'Enter' && inputValue) {
+      handleClick();
+    }
+  };
+
+
   return (
-    <div className="bg-blue-300 dark:bg-blue-300 h-[70vh] w-[60vw] rounded-lg px-4 flex flex-col gap-2 text-center justify-between">
+    <div className="sm:resize max-w-full max-h-full overflow-auto border border-slate-300 text-slate-700  dark:border-pink-300 h-[70vh] w-full rounded-lg px-4 flex flex-col gap-2 text-center justify-between">
       <div className="flex flex-row justify-between items-center">
-        <h3 className="dark:text-gray-900">Chat Window</h3>
+        <h3 className="dark:text-pink-200">Chat Window</h3>
         <button
           onClick={handleReset}
           disabled={resetMutation.isPending || messagesState.length === 0}
-          className="bg-blue-500 text-white font-semibold my-2 p-2 rounded-lg hover:bg-blue-600 hover:cursor-pointer transition-colors duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed w-fit"
+          className="bg-transparent  text-slate-700 dark:text-pink-200 font-semibold my-2 p-2 rounded-lg hover:scale-105 hover:cursor-pointer transition-colors duration-300 disabled:bg-gray-50 disabled:cursor-not-allowed w-fit"
         >
-          Reset
+          + New
         </button>
       </div>
       <Conversation messages={messagesState} />
@@ -85,22 +90,18 @@ export default function ChatWindow() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Type message...."
-          className="my-2 p-2 border-2 border-gray-300 rounded-lg w-[80%] focus:outline-none focus:border-4"
+          className="my-2 p-2 hover:border-2 border border-slate-300 text-slate-700 dark:border-pink-200 dark:text-white rounded-lg w-[80%] focus:outline-none focus:border-2"
+          onKeyDown={handleEnterKeyDown}
         />
         <button
           onClick={handleClick}
           disabled={!inputValue || mutation.isPending}
-          className="bg-blue-500 text-white font-semibold my-2 p-2 rounded-lg hover:bg-blue-600 hover:cursor-pointer transition-colors duration-300 flex-1 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-transparent text-blue-900 dark:text-pink-200 font-semibold my-2 p-2 rounded-lg hover:scale-105 hover:cursor-pointer transition-colors duration-300 flex-1 disabled:text-gray-400 disabled:cursor-not-allowed"
+          
         >
           Send ⌲
         </button>
       </div>
-      <button
-        onClick={() => console.log(`Messages: `, messagesState)}
-        className="bg-blue-500 text-white font-semibold my-2 p-2 rounded-lg hover:bg-blue-600 hover:cursor-pointer transition-colors duration-300 flex-1 disabled:bg-gray-400 disabled:cursor-not-allowed"
-      >
-        Messages
-      </button>
     </div>
   );
 }

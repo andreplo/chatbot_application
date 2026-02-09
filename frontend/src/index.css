@@ -22,3 +22,37 @@
     @apply text-2xl font-semibold;
   }
 }
+
+@layer utilities {
+  .scrollbar-transparent::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-thumb {
+    background-color: #0c4a6e; /* blue-900 */
+    border-radius: 9999px;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* Firefox */
+  .scrollbar-transparent {
+    scrollbar-width: thin;
+    scrollbar-color: #0c4a6e transparent;
+  }
+
+  /* Dark mode variant */
+  .dark .scrollbar-transparent::-webkit-scrollbar-thumb {
+    background-color: #fbcfe8; /* pink-200 */
+  }
+
+  .dark .scrollbar-transparent {
+    scrollbar-color: #fbcfe8 transparent; /* Firefox */
+  }
+}
