@@ -16,9 +16,11 @@ export default function Conversation(props: ConversationProps) {
 
   return (
     <ul className="h-[70%] overflow-y-auto p-2 rounded-lg scrollbar-transparent border-t border-b border-slate-300 dark:border-pink-300">
-      {messages.map((message) => (
-        <Message key={message.id} {...message} />
-      ))}
+      {messages.length !== 0 ? (
+        messages.map((message) => <Message key={message.id} {...message} />)
+      ) : (
+        <p className="m-auto text-center text-slate-500 dark:text-slate-400">No messages yet</p>
+      )}
       <li ref={bottomRef}></li>
     </ul>
   );
