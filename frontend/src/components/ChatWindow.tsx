@@ -47,7 +47,7 @@ export default function ChatWindow() {
   const handleClick = () => {
     console.log(inputValue);
     setInputValue('');
-    
+
     mutation.mutate(inputValue);
   };
 
@@ -64,12 +64,11 @@ export default function ChatWindow() {
   };
 
   const handleEnterKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && e.shiftKey) return;
+    if (e.key === 'Enter' && e.shiftKey) return;
     if (e.key === 'Enter' && inputValue) {
       handleClick();
     }
   };
-
 
   return (
     <div className="sm:resize max-w-full max-h-full overflow-auto border border-slate-300 text-slate-700  dark:border-pink-300 h-[70vh] w-full rounded-lg px-4 flex flex-col gap-2 text-center justify-between">
@@ -97,7 +96,6 @@ export default function ChatWindow() {
           onClick={handleClick}
           disabled={!inputValue || mutation.isPending}
           className="bg-transparent text-blue-900 dark:text-pink-200 font-semibold my-2 p-2 rounded-lg hover:scale-105 hover:cursor-pointer transition-colors duration-300 flex-1 disabled:text-gray-400 disabled:cursor-not-allowed"
-          
         >
           Send ⌲
         </button>

@@ -17,7 +17,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -U pip setuptools wheel
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --index-url https://download.pytorch.org/whl/cpu torch==2.10.0
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt
+# torch==2.10.0
+# RUN pip install -r requirements.txt
 
 # Copy project
 COPY . .
