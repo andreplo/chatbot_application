@@ -13,10 +13,22 @@ My API was build with FastAPI with which I exposed the endpoints that my fronten
 ------------- CAUTION --------------------------------------------------------------------------------
 _Even if you can visit the frontend page, messages will fail until you see the following lines on your terminal_
 
-backend | INFO: Started server process [1]
+<!-- backend | INFO: Started server process [1]
 backend | INFO: Waiting for application startup.
 backend | INFO: Application startup complete.
-backend | INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+backend | INFO: Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit) -->
+
+GPT2LMHeadModel LOAD REPORT from: microsoft/DialoGPT-medium
+Key | Status | |
+---------------------------------+------------+--+-
+transformer.h.{0...23}.attn.bias | UNEXPECTED | |
+
+Notes:
+
+- UNEXPECTED :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+  INFO Started server process [15340]
+  INFO Waiting for application startup.
+  INFO Application startup complete.
 
 _Due to gpt-model loading slowly, even though the backend container seems to be running the backend application is still initializing for some time (2-3mins)_
 
@@ -26,6 +38,9 @@ _Due to gpt-model loading slowly, even though the backend container seems to be 
 
 The Frontend application was made with React,Typescript + Vite. The Chat window is Responsive and I have made it resizable for testing. You can grab the bottom right corner and resize it for experimentation. For the Components' styling I used TailwindCSS. I have also made two modes (Night/Light Modes). For the backend calls I used _axios_ as a client and in addition i used _TanstackQuery_ to leverage the out-of-the-box isPending,isSuccess,isError signals it provides for better error and loading handling.
 
+"Send and fail" checkbox:
+If you check it and then send a message you can see what would be displayed on the conversation if an error status was returned after a message was sent.
+
 # Containerization
 
 I used Docker Compose (docker-compose.yml ---> located at the root folder of the project). This "docker-compose.yml" uses two Dockerfiles, "/backend/Dockerfile" and "/frontend/Dockerfile" which are responsible for the creation of the backend and frontend images respectively.
@@ -34,9 +49,9 @@ I used Docker Compose (docker-compose.yml ---> located at the root folder of the
 
 Inside the root folder:
 
-1] Open a terminal on the root level of this repo "/../../chatbot*application"
+1] Open a terminal on the root level of this repo "/../../chatbot_application" and checkout "develop" branch
 2] Make sure that you have Docker Desktop installed and running on your machine.
-3] while being on the root folder run the command \_docker compose up --build*. -It might take a while due to certain python libraries' size which are downloaded during container initialization - - The above command starts a network with two containers, one for our frontend application and one for our backend one -
+3] while being on the root folder run the command \_docker compose up --build\*. -It might take a while due to certain python libraries' size which are downloaded during container initialization - - The above command starts a network with two containers, one for our frontend application and one for our backend one -
 
 4] If everything's working the applications run on ports:
 

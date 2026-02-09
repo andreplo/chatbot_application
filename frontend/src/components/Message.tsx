@@ -5,11 +5,24 @@ export type MessageProps = {
   text: string;
   sender: 'user' | 'bot';
   // timestamp: number;
-  type?: 'sent' | 'received' | 'pending';
+  type?: 'sent' | 'received' | 'pending' | 'error';
 };
 
 export default function Message(props: MessageProps) {
   const { id, text, sender, type } = props;
+
+  if (type === 'error') {
+    return (
+      <li
+        key={id}
+        className={
+          'flex flex-col gap-2 mr-auto text-left rounded-bl-none bg-red-900 text-white  p-2 rounded-lg mb-4 max-w-[40%] w-fit '
+        }
+      >
+        Message failed to send. Please try again.
+      </li>
+    );
+  }
 
   if (type === 'pending') {
     return (
